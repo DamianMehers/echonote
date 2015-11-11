@@ -1,0 +1,11 @@
+{
+  "name": "AlexaPowerNoter",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "evernote": "~1.25.82"
+  }
+}
