@@ -1,15 +1,15 @@
 /**
- * Created by damian on 10 Nov 2015.
+ * Created by damian mehers on 10 Nov 2015.
  * Copyright (c) 2015 Atadore SARL
  */
 /**
- * This sample demonstrates a simple skill built with the Amazon Alexa Skills Kit.
- * The Intent Schema, Custom Slots, and Sample Utterances for this skill, as well as
- * testing instructions are located at http://amzn.to/1LzFrj6
+ * For more information on using this Skill please see https://damianblog.com/2015/11/11/alexa-evernote
+ * This is based on the example Skill, and most of the comments and code come from it.
  *
  * For additional samples, visit the Alexa Skills Kit Getting Started guide at
  * http://amzn.to/1LGWsLG
  */
+// To get IntelliJ to be happy
 if (!require) {
     var require = {};
 }
@@ -99,13 +99,10 @@ function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     var sessionAttributes = [];
     var cardTitle = "Welcome";
-    var speechOutput = "Welcome to the Alexa Skills Kit sample, " +
-        "Please tell me your favorite color by saying, " +
-        "my favorite color is red";
+    var speechOutput = "...";
     // If the user either does not reply to the welcome message or says something that is not
     // understood, they will be prompted again with this text.
-    var repromptText = "Please tell me your favorite color by saying, " +
-        "my favorite color is red";
+    var repromptText = "...";
     var shouldEndSession = false;
     callback(sessionAttributes, buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
@@ -121,12 +118,11 @@ function saveNote(intent, session, callback) {
     var speechOutput = "";
     if (contentSlot) {
         var noteText = contentSlot.value;
-        sessionAttributes = [];
         speechOutput = "OK.";
         repromptText = "What was that?";
         shouldEndSession = true;
-        var noteStoreURL = 'https://sandbox.evernote.com/shard/s1/notestore';
-        var authenticationToken = 'S=s1:U=319d:E=158495b6ef1:C=150f1aa3ff0:P=1cd:A=en-devtoken:V=2:H=0a385bb569ddfbd881a94b9375ddd231';
+        var noteStoreURL = '...';
+        var authenticationToken = '...';
         var noteStoreTransport = new Evernote.Thrift.NodeBinaryHttpTransport(noteStoreURL);
         var noteStoreProtocol = new Evernote.Thrift.BinaryProtocol(noteStoreTransport);
         var noteStore = new Evernote.NoteStoreClient(noteStoreProtocol);
@@ -175,47 +171,3 @@ function buildResponse(sessionAttributes, speechletResponse) {
         response: speechletResponse
     };
 }
-//
-//console.log('hello');
-//
-//var alexaEvent : AlexaEvent = {
-//    "session": {
-//        "new": false,
-//        "sessionId": "session1234",
-//        "attributes": {},
-//        "user": {
-//            "userId": null
-//        },
-//        "application": {
-//            "applicationId": "amzn1.echo-sdk-ams.app.[unique-value-here]"
-//        }
-//    },
-//    "version": "1.0",
-//    "request": {
-//        "intent": {
-//            "slots": {
-//                "Content": {
-//                    "name": "Content",
-//                    "value": "This is my note content"
-//                }
-//            },
-//            "name": "TakeANote"
-//        },
-//        "type": "IntentRequest",
-//        "requestId": "request5678"
-//    }
-//};
-//var alexaContext : AlexaContext = {
-//    succeed : function() {console.log('succeed invoked');},
-//    fail : function(result) {console.log('fail invoked ' + JSON.stringify(result));} };
-//
-//
-//
-//
-//exports.handler(alexaEvent, alexaContext);
-//console.log('Handler returned');
-//function wait () {
-//    setTimeout(wait, 1000);
-//};
-//wait();
-//console.log('bye...');
